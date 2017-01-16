@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Speechmatics.Client.Util
 {
 
-    static class EnumUtil
+    internal static class EnumUtil
     {
 
         /// <summary>
@@ -17,13 +17,24 @@ namespace Speechmatics.Client.Util
         /// <param name="instance"></param>
         /// <returns></returns>
         public static string ToEnumString<T>(this T instance)
+            where T : struct
         {
-            Contract.Requires<ArgumentNullException>(instance != null);
-
             return typeof(T).GetField(Enum.GetName(typeof(T), instance))
                 .GetCustomAttributes<EnumMemberAttribute>(true)
                 .Select(i => i.Value)
                 .FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets the string value specified by the <see cref="EnumMemberAttribute"/>.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="instance"></param>
+        /// <returns></returns>
+        public static string ToEnumString<T>(this T? instance)
+            where T : struct
+        {
+            return instance != null ? ((T)instance).ToEnumString() : null;
         }
 
         /// <summary>
@@ -33,9 +44,10 @@ namespace Speechmatics.Client.Util
         /// <param name="value"></param>
         /// <returns></returns>
         public static T ToEnum<T>(string value)
+            where T : struct
         {
             Contract.Requires<ArgumentNullException>(value != null);
-
+            
             return Enum.GetNames(typeof(T))
                 .Where(i => typeof(T)
                     .GetField(i)
