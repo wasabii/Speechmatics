@@ -7,7 +7,7 @@ using System.Runtime.Serialization;
 namespace Speechmatics.Client.Util
 {
 
-    static class EnumUtil
+    internal static class EnumUtil
     {
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Speechmatics.Client.Util
             where T : struct
         {
             Contract.Requires<ArgumentNullException>(value != null);
-
+            
             return Enum.GetNames(typeof(T))
                 .Where(i => typeof(T)
                     .GetField(i)
