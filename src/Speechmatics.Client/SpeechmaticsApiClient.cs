@@ -126,14 +126,14 @@ namespace Speechmatics.Client
                 content.Add(new StringContent(model), "model");
 
                 // add optional parameters
-                if (notification != null)
-                    content.Add(new StringContent(notification.ToEnumString()), "notification");
+                if (notification.HasValue)
+                    content.Add(new StringContent(notification.Value.ToEnumString()), "notification");
                 if (callback != null)
                     content.Add(new StringContent(callback.ToString()), "callback");
                 if (meta != null)
                     content.Add(new StringContent(meta), "meta");
-                if (diarisation != null)
-                    content.Add(new StringContent((bool)diarisation ? "true" : "false"), "diarisation");
+                if (diarisation.HasValue)
+                    content.Add(new StringContent(diarisation.Value ? "true" : "false"), "diarisation");
                 reqs.Content = content;
 
                 // send request
