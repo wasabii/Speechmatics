@@ -34,7 +34,7 @@ namespace Speechmatics.Client.Util
         public static string ToEnumString<T>(this T? instance)
             where T : struct
         {
-            return instance != null ? instance.Value.ToEnumString() : null;
+            return instance != null ? ((T)instance).ToEnumString() : null;
         }
 
         /// <summary>
