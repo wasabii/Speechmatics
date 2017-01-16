@@ -11,7 +11,7 @@ namespace Speechmatics.Client.Tests
         [TestMethod]
         public async Task TestMethod1()
         {
-            var c = new SpeechmaticsApiClient("ZWZkYTYzNWYtYTdmMy00YmE5LWE0M2ItZDQxNGYxZTM5ZDc5");
+            var c = new SpeechmaticsApiClient("");
             var j = await c.GetJob(1820, 400754);
             var t = await c.GetTranscript(1820, 400754);
         }
